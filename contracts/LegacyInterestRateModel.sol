@@ -1,8 +1,8 @@
 pragma solidity ^0.5.16;
 
 /**
-  * @title Compound's Legacy InterestRateModel Interface
-  * @author Compound (modified by Arr00)
+  * @title Amplify's Legacy InterestRateModel Interface
+  * @author Amplify (modified by Arr00)
   */
 contract LegacyInterestRateModel {
     /// @notice Indicator that this is an InterestRateModel contract (for inspection)

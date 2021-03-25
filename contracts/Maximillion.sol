@@ -3,8 +3,8 @@ pragma solidity ^0.5.16;
 import "./CEther.sol";
 
 /**
- * @title Compound's Maximillion Contract
- * @author Compound
+ * @title Amplify's Maximillion Contract
+ * @author Amplify
  */
 contract Maximillion {
     /**

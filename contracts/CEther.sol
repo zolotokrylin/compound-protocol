@@ -3,9 +3,9 @@ pragma solidity ^0.5.16;
 import "./CToken.sol";
 
 /**
- * @title Compound's CEther Contract
+ * @title Amplify's CEther Contract
  * @notice CToken which wraps Ether
- * @author Compound
+ * @author Amplify
  */
 contract CEther is CToken {
     /**

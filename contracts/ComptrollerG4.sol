@@ -7,11 +7,11 @@ import "./PriceOracle.sol";
 import "./ComptrollerInterface.sol";
 import "./ComptrollerStorage.sol";
 import "./Unitroller.sol";
-import "./Governance/Comp.sol";
+import "./Governance/AMPT.sol";
 
 /**
- * @title Compound's Comptroller Contract
- * @author Compound
+ * @title Amplify's Comptroller Contract
+ * @author Amplify
  */
 contract ComptrollerG4 is ComptrollerV3Storage, ComptrollerInterface, ComptrollerErrorReporter, Exponential {
     /// @notice Emitted when an admin supports a market
@@ -1233,10 +1233,10 @@ contract ComptrollerG4 is ComptrollerV3Storage, ComptrollerInterface, Comptrolle
      */
     function transferComp(address user, uint userAccrued, uint threshold) internal returns (uint) {
         if (userAccrued >= threshold && userAccrued > 0) {
-            Comp comp = Comp(getCompAddress());
-            uint compRemaining = comp.balanceOf(address(this));
-            if (userAccrued <= compRemaining) {
-                comp.transfer(user, userAccrued);
+            AMPT ampt = AMPT(getCompAddress());
+            uint amptRemaining = ampt.balanceOf(address(this));
+            if (userAccrued <= amptRemaining) {
+                ampt.transfer(user, userAccrued);
                 return 0;
             }
         }

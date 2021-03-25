@@ -3,9 +3,9 @@ pragma solidity ^0.5.16;
 import "./CToken.sol";
 
 /**
- * @title Compound's CErc20 Contract
+ * @title Amplify's CErc20 Contract
  * @notice CTokens which wrap an EIP-20 underlying
- * @author Compound
+ * @author Amplify
  */
 contract CErc20 is CToken, CErc20Interface {
     /**
@@ -107,16 +107,6 @@ contract CErc20 is CToken, CErc20Interface {
     function liquidateBorrow(address borrower, uint repayAmount, CTokenInterface cTokenCollateral) external returns (uint) {
         (uint err,) = liquidateBorrowInternal(borrower, repayAmount, cTokenCollateral);
         return err;
-    }
-
-    /**
-     * @notice A public function to sweep accidental ERC-20 transfers to this contract. Tokens are sent to admin (timelock)
-     * @param token The address of the ERC-20 token to sweep
-     */
-    function sweepToken(EIP20NonStandardInterface token) external {
-    	require(address(token) != underlying, "CErc20::sweepToken: can not sweep underlying token");
-    	uint256 balance = token.balanceOf(address(this));
-    	token.transfer(admin, balance);
     }
 
     /**

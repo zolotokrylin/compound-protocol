@@ -7,9 +7,9 @@ interface CompLike {
 }
 
 /**
- * @title Compound's CCompLikeDelegate Contract
+ * @title Amplify's CCompLikeDelegate Contract
  * @notice CTokens which can 'delegate votes' of their underlying ERC-20
- * @author Compound
+ * @author Amplify
  */
 contract CCompLikeDelegate is CErc20Delegate {
   /**

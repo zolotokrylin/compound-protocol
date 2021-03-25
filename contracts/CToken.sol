@@ -5,12 +5,13 @@ import "./CTokenInterfaces.sol";
 import "./ErrorReporter.sol";
 import "./Exponential.sol";
 import "./EIP20Interface.sol";
+import "./EIP20NonStandardInterface.sol";
 import "./InterestRateModel.sol";
 
 /**
- * @title Compound's CToken Contract
+ * @title Amplify's CToken Contract
  * @notice Abstract base for CTokens
- * @author Compound
+ * @author Amplify
  */
 contract CToken is CTokenInterface, Exponential, TokenErrorReporter {
     /**
@@ -120,8 +121,7 @@ contract CToken is CTokenInterface, Exponential, TokenErrorReporter {
         /* We emit a Transfer event */
         emit Transfer(src, dst, tokens);
 
-        // unused function
-        // comptroller.transferVerify(address(this), src, dst, tokens);
+        comptroller.transferVerify(address(this), src, dst, tokens);
 
         return uint(Error.NO_ERROR);
     }
@@ -555,8 +555,7 @@ contract CToken is CTokenInterface, Exponential, TokenErrorReporter {
         emit Transfer(address(this), minter, vars.mintTokens);
 
         /* We call the defense hook */
-        // unused function
-        // comptroller.mintVerify(address(this), minter, vars.actualMintAmount, vars.mintTokens);
+        comptroller.mintVerify(address(this), minter, vars.actualMintAmount, vars.mintTokens);
 
         return (uint(Error.NO_ERROR), vars.actualMintAmount);
     }
@@ -794,8 +793,7 @@ contract CToken is CTokenInterface, Exponential, TokenErrorReporter {
         emit Borrow(borrower, borrowAmount, vars.accountBorrowsNew, vars.totalBorrowsNew);
 
         /* We call the defense hook */
-        // unused function
-        // comptroller.borrowVerify(address(this), borrower, borrowAmount);
+        comptroller.borrowVerify(address(this), borrower, borrowAmount);
 
         return uint(Error.NO_ERROR);
     }
@@ -912,8 +910,7 @@ contract CToken is CTokenInterface, Exponential, TokenErrorReporter {
         emit RepayBorrow(payer, borrower, vars.actualRepayAmount, vars.accountBorrowsNew, vars.totalBorrowsNew);
 
         /* We call the defense hook */
-        // unused function
-        // comptroller.repayBorrowVerify(address(this), payer, borrower, vars.actualRepayAmount, vars.borrowerIndex);
+        comptroller.repayBorrowVerify(address(this), payer, borrower, vars.actualRepayAmount, vars.borrowerIndex);
 
         return (uint(Error.NO_ERROR), vars.actualRepayAmount);
     }
@@ -1017,8 +1014,7 @@ contract CToken is CTokenInterface, Exponential, TokenErrorReporter {
         emit LiquidateBorrow(liquidator, borrower, actualRepayAmount, address(cTokenCollateral), seizeTokens);
 
         /* We call the defense hook */
-        // unused function
-        // comptroller.liquidateBorrowVerify(address(this), address(cTokenCollateral), liquidator, borrower, actualRepayAmount, seizeTokens);
+        comptroller.liquidateBorrowVerify(address(this), address(cTokenCollateral), liquidator, borrower, actualRepayAmount, seizeTokens);
 
         return (uint(Error.NO_ERROR), actualRepayAmount);
     }
@@ -1089,8 +1085,7 @@ contract CToken is CTokenInterface, Exponential, TokenErrorReporter {
         emit Transfer(borrower, liquidator, seizeTokens);
 
         /* We call the defense hook */
-        // unused function
-        // comptroller.seizeVerify(address(this), seizerToken, liquidator, borrower, seizeTokens);
+        comptroller.seizeVerify(address(this), seizerToken, liquidator, borrower, seizeTokens);
 
         return uint(Error.NO_ERROR);
     }

@@ -3,9 +3,9 @@ pragma solidity ^0.5.16;
 import "./CTokenInterfaces.sol";
 
 /**
- * @title Compound's CErc20Delegator Contract
+ * @title Amplify's CErc20Delegator Contract
  * @notice CTokens which wrap an EIP-20 underlying and delegate to an implementation
- * @author Compound
+ * @author Amplify
  */
 contract CErc20Delegator is CTokenInterface, CErc20Interface, CDelegatorInterface {
     /**
@@ -326,15 +326,6 @@ contract CErc20Delegator is CTokenInterface, CErc20Interface, CDelegatorInterfac
         bytes memory data = delegateToImplementation(abi.encodeWithSignature("seize(address,address,uint256)", liquidator, borrower, seizeTokens));
         return abi.decode(data, (uint));
     }
-
-    /**
-     * @notice A public function to sweep accidental ERC-20 transfers to this contract. Tokens are sent to admin (timelock)
-     * @param token The address of the ERC-20 token to sweep
-     */
-    function sweepToken(EIP20NonStandardInterface token) external {
-        delegateToImplementation(abi.encodeWithSignature("sweepToken(address)", token));
-    }
-
 
     /*** Admin Functions ***/
 
